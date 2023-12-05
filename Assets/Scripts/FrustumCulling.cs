@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class FrustrumCulling : MonoBehaviour
 {
-    // Start is called before the first frame update
     //[SerializeField] GameObject point;
     FrustumController frustumController;
+
+    // Start is called before the first frame update
     void Start()
     {
         frustumController = GetComponent<FrustumController>();

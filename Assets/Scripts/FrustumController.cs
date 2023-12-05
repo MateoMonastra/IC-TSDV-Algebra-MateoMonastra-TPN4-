@@ -51,15 +51,48 @@ public class FrustumController : MonoBehaviour
         farLimit = transform.position + transform.forward * renderingDistance;
         nearLimit = transform.position + transform.forward * nearClippingPlane;
 
-        nearUpperLeftVertex = new Vector3(Mathf.Tan((-fieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane + nearLimit.x, Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane+ nearLimit.y, nearLimit.z);
-        nearUpperRightVertex = new Vector3(Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane + nearLimit.x, Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane+ nearLimit.y, nearLimit.z);
-        nearLowerLeftVertex = new Vector3(Mathf.Tan((-fieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane + nearLimit.x, Mathf.Tan((-verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane+ nearLimit.y, nearLimit.z);
-        nearLowerRightVertex = new Vector3(Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane + nearLimit.x, Mathf.Tan((-verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane+ nearLimit.y, nearLimit.z);
+        float nearPlaneWidthSlope = Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane;
+        float nearPlaneHeightSlope = Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * nearClippingPlane;
 
-        farUpperLeftVertex = new Vector3(Mathf.Tan((-fieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.x, Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.y, farLimit.z);
-        farUpperRightVertex = new Vector3(Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.x, Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.y, farLimit.z);
-        farLowerLeftVertex = new Vector3(Mathf.Tan((-fieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.x, Mathf.Tan((-verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.y, farLimit.z);
-        farLowerRightVertex = new Vector3(Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.x, Mathf.Tan((-verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance + farLimit.y, farLimit.z);
+        float farPlaneWidthSlope = Mathf.Tan((fieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance;
+        float farPlaneHeightSlope = Mathf.Tan((verticalfieldOfViewAngle / 2) * Mathf.Deg2Rad) * renderingDistance;
+
+
+        Vector3 up = transform.up;
+        Vector3 right = transform.right;
+
+        nearUpperLeftVertex = new Vector3(nearLimit.x + (up.x * nearPlaneHeightSlope) - (right.x * nearPlaneWidthSlope),
+                                          nearLimit.y + (up.y * nearPlaneHeightSlope) - (right.y * nearPlaneWidthSlope),
+                                          nearLimit.z + (up.z * nearPlaneHeightSlope) - (right.z * nearPlaneWidthSlope));
+
+        nearUpperRightVertex = new Vector3(nearLimit.x + (up.x * nearPlaneHeightSlope) + (right.x * nearPlaneWidthSlope),
+                                           nearLimit.y + (up.y * nearPlaneHeightSlope) + (right.y * nearPlaneWidthSlope),
+                                           nearLimit.z + (up.z * nearPlaneHeightSlope) + (right.z * nearPlaneWidthSlope));
+
+        nearLowerLeftVertex = new Vector3(nearLimit.x - (up.x * nearPlaneHeightSlope) - (right.x * nearPlaneWidthSlope),
+                                          nearLimit.y - (up.y * nearPlaneHeightSlope) - (right.y * nearPlaneWidthSlope),
+                                          nearLimit.z - (up.z * nearPlaneHeightSlope) - (right.z * nearPlaneWidthSlope));
+
+        nearLowerRightVertex = new Vector3(nearLimit.x - (up.x * nearPlaneHeightSlope) + (right.x * nearPlaneWidthSlope),
+                                           nearLimit.y - (up.y * nearPlaneHeightSlope) + (right.y * nearPlaneWidthSlope),
+                                           nearLimit.z - (up.z * nearPlaneHeightSlope) + (right.z * nearPlaneWidthSlope));
+
+
+        farUpperLeftVertex = new Vector3(farLimit.x + (up.x * farPlaneHeightSlope) - (right.x * farPlaneWidthSlope),
+                                         farLimit.y + (up.y * farPlaneHeightSlope) - (right.y * farPlaneWidthSlope),
+                                         farLimit.z + (up.z * farPlaneHeightSlope) - (right.z * farPlaneWidthSlope));
+
+        farUpperRightVertex = new Vector3(farLimit.x + (up.x * farPlaneHeightSlope) + (right.x * farPlaneWidthSlope),
+                                          farLimit.y + (up.y * farPlaneHeightSlope) + (right.y * farPlaneWidthSlope),
+                                          farLimit.z + (up.z * farPlaneHeightSlope) + (right.z * farPlaneWidthSlope));
+
+        farLowerLeftVertex = new Vector3(farLimit.x - (up.x * farPlaneHeightSlope) - (right.x * farPlaneWidthSlope),
+                                         farLimit.y - (up.y * farPlaneHeightSlope) - (right.y * farPlaneWidthSlope),
+                                         farLimit.z - (up.z * farPlaneHeightSlope) - (right.z * farPlaneWidthSlope));
+
+        farLowerRightVertex = new Vector3(farLimit.x - (up.x * farPlaneHeightSlope) + (right.x * farPlaneWidthSlope),
+                                          farLimit.y - (up.y * farPlaneHeightSlope) + (right.y * farPlaneWidthSlope),
+                                          farLimit.z - (up.z * farPlaneHeightSlope) + (right.z * farPlaneWidthSlope));
 
     }
 
