@@ -44,11 +44,8 @@ public class FrustrumCulling : MonoBehaviour
         }
     }
 
-    int insideOfNormals = 0;
     bool CheckPointInside(Vector3 point)
     {
-        insideOfNormals = 0;
-
         for (int faceIndex = 0; faceIndex <= frustumController.vertices.Count - 3; faceIndex += 3)
         {
             if (!frustumController.IsPointInside(point, faceIndex))
