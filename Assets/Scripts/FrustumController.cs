@@ -79,41 +79,6 @@ public class FrustumController : MonoBehaviour
         farLowerLeftVertex = farLimit - fixedFarCenterX - fixedFarCenterY;
         farLowerRightVertex = farLimit + fixedFarCenterX - fixedFarCenterY;
 
-
-        // Old Calculations for each vertex
-
-        //nearUpperLeftVertex = new Vector3(nearLimit.x + fixedNearCenterY.x - fixedNearCenterX.x,
-        //                                  nearLimit.y + fixedNearCenterY.y - fixedNearCenterX.y,
-        //                                  nearLimit.z + fixedNearCenterY.z - fixedNearCenterX.z);
-
-        //nearUpperRightVertex = new Vector3(nearLimit.x + fixedNearCenterY.x + fixedNearCenterX.x,
-        //                                   nearLimit.y + fixedNearCenterY.y + fixedNearCenterX.y,
-        //                                   nearLimit.z + fixedNearCenterY.z + fixedNearCenterX.z);
-
-        //nearLowerLeftVertex = new Vector3(nearLimit.x - fixedNearCenterY.x - fixedNearCenterX.x,
-        //                                  nearLimit.y - fixedNearCenterY.y - fixedNearCenterX.y,
-        //                                  nearLimit.z - fixedNearCenterY.z - fixedNearCenterX.z);
-
-        //nearLowerRightVertex = new Vector3(nearLimit.x - fixedNearCenterY.x + fixedNearCenterX.x,
-        //                                   nearLimit.y - fixedNearCenterY.y + fixedNearCenterX.y,
-        //                                   nearLimit.z - fixedNearCenterY.z + fixedNearCenterX.z);
-
-        //farUpperLeftVertex = new Vector3(farLimit.x + fixedFarCenterY.x - fixedFarCenterX.x,
-        //                                 farLimit.y + fixedFarCenterY.y - fixedFarCenterX.y,
-        //                                 farLimit.z + fixedFarCenterY.z - fixedFarCenterX.z);
-
-        //farUpperRightVertex = new Vector3(farLimit.x + fixedFarCenterY.x + fixedFarCenterX.x,
-        //                                  farLimit.y + fixedFarCenterY.y + fixedFarCenterX.y,
-        //                                  farLimit.z + fixedFarCenterY.z + fixedFarCenterX.z);
-
-        //farLowerLeftVertex = new Vector3(farLimit.x - fixedFarCenterY.x - fixedFarCenterX.x,
-        //                                 farLimit.y - fixedFarCenterY.y - fixedFarCenterX.y,
-        //                                 farLimit.z - fixedFarCenterY.z - fixedFarCenterX.z);
-
-        //farLowerRightVertex = new Vector3(farLimit.x - fixedFarCenterY.x + fixedFarCenterX.x,
-        //                                  farLimit.y - fixedFarCenterY.y + fixedFarCenterX.y,
-        //                                  farLimit.z - fixedFarCenterY.z + fixedFarCenterX.z);
-
     }
 
     private void OnDrawGizmos()
@@ -222,9 +187,6 @@ public class FrustumController : MonoBehaviour
         Vector3 firstSecond = secondVertex - firstVertex;
         Vector3 firstThird = thirdVertex - firstVertex;
 
-        //Vector3 normal = Vector3.zero;
-        //Vector3 normal = Vector3.Cross(secondVertex - firstVertex, thirdVertex - firstVertex).normalized;
-
         normal.x = (firstThird.y * firstSecond.z) - (firstThird.z * firstSecond.y);
         normal.y = (firstThird.z * firstSecond.x) - (firstThird.x * firstSecond.z);
         normal.z = (firstThird.x * firstSecond.y) - (firstThird.y * firstSecond.x);
@@ -239,10 +201,6 @@ public class FrustumController : MonoBehaviour
     {
         Vector3 normal = GetFaceNormal(faceIndex);
         Vector3 facePoint = GetFacePoint(faceIndex);
-        //Vector3 offset;
-        //offset.x = (vertices[faceIndex].x + vertices[faceIndex + 1].x + vertices[faceIndex + 2].x) / 3;
-        //offset.y = (vertices[faceIndex].y + vertices[faceIndex + 1].y + vertices[faceIndex + 2].y) / 3;
-        //offset.z = (vertices[faceIndex].z + vertices[faceIndex + 1].z + vertices[faceIndex + 2].z) / 3;
 
         return Vector3.Dot(normal, point - facePoint) > 0;
     }

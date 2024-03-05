@@ -52,11 +52,6 @@ public class FrustrumCulling : MonoBehaviour
                 return false;
         }
 
-        //Debug.Log(insideOfNormals + "/" + frustumController.vertices.Count / 3);
-
-        //if (insideOfNormals >= frustumController.vertices.Count / 3)
-        //    Debug.Log("Adentro");
-
         return true;
     }
 }
